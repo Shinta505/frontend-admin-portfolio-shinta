@@ -28,7 +28,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             // Simpan status login ke sessionStorage
             sessionStorage.setItem('isLoggedIn', 'true');
             alert('Login berhasil!');
-            window.location.href = '/frontend_admin/html/kelola-portfolio.html';
+            window.location.href = '/html/kelola-portfolio.html';
         } else {
             errorMessage.textContent = data.message || 'Terjadi kesalahan saat login.';
         }
