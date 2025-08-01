@@ -186,7 +186,8 @@ body {
 
 .modal-content {
     background-color: var(--white-color);
-    margin: 10% auto;
+    margin: 5% auto;
+    /* Mengurangi margin atas agar lebih pas */
     padding: 2rem;
     border-radius: 8px;
     width: 90%;
@@ -194,6 +195,10 @@ body {
     position: relative;
     z-index: 2001;
     animation: slideIn 0.3s;
+    max-height: 85vh;
+    /* Batas tinggi maksimal adalah 85% dari tinggi layar */
+    overflow-y: auto;
+    /* Tambahkan scroll vertikal jika konten melebihi max-height */
 }
 
 .close-btn {
