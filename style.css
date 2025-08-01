@@ -1,0 +1,163 @@
+:root {
+    --primary-color: #3a7bd5;
+    --secondary-color: #3a60d5;
+    /* Warna teks utama di dalam kartu diubah menjadi gelap */
+    --card-text-color: #2c3e50;
+    --card-placeholder-color: #8a99a8;
+    --error-color: #d32f2f;
+    /* Warna error lebih gelap agar terbaca */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Menggunakan gambar dari user sebagai background */
+    background-image: url('assets/bg-admin.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    /* Mencegah scroll pada body */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Efek Glassmorphism pada Kotak Login */
+.login-box {
+    background: rgba(255, 255, 255, 0.25);
+    /* Latar belakang sedikit lebih opak */
+    backdrop-filter: blur(10px);
+    /* Efek blur */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.5rem 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}
+
+/* Judul diubah menjadi warna gelap */
+h2 {
+    color: var(--card-text-color);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.75rem;
+    text-align: left;
+    position: relative;
+}
+
+/* Label diubah menjadi warna gelap */
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--card-text-color);
+}
+
+/* Input field diubah agar teks gelap terlihat jelas */
+.input-group input {
+    width: 100%;
+    padding: 0.85rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: var(--card-text-color);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.input-group input::placeholder {
+    color: var(--card-placeholder-color);
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 45px;
+    /* Ruang untuk ikon mata */
+}
+
+/* Ikon mata diubah menjadi warna gelap */
+.password-wrapper i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--card-placeholder-color);
+    transition: color 0.3s ease;
+}
+
+.password-wrapper i:hover {
+    color: var(--card-text-color);
+}
+
+.login-button {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Pesan error diubah agar lebih kontras */
+.error-message {
+    color: var(--error-color);
+    background-color: rgba(255, 154, 158, 0.25);
+    border: 1px solid var(--error-color);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    height: auto;
+    min-height: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: none;
+}
+
+.error-message:not(:empty) {
+    display: block;
+}

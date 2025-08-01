@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Testimoni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../style-admin.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="kelola-portfolio.html">Portfolio</a></li>
+            <li><a href="kelola-experience.html">Experience</a></li>
+            <li><a href="kelola-skill.html">Skill</a></li>
+            <li><a href="list-testimoni.html" class="active">Testimoni</a></li>
+            <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="testimoni-section">
+        <div class="content-header">
+            <h1>Daftar Testimoni</h1>
+        </div>
+        <div class="data-table-container">
+            <table class="data-table" id="testimoniTable">
+                <thead>
+                    <tr>
+                        <th>Nama Pengirim</th>
+                        <th>Isi Testimoni</th>
+                        <th>Tanggal Dikirim</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="viewTestimoniModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn view-close">&times;</span>
+            <h2 id="viewModalTitle">Detail Testimoni</h2>
+            <div id="testimoniDetailContent">
+                <p><strong>Nama Pengirim:</strong> <span id="detailNama"></span></p>
+                <p><strong>Tanggal Dikirim:</strong> <span id="detailTanggal"></span></p>
+                <p><strong>Isi Testimoni:</strong></p>
+                <p id="detailIsi"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin menghapus item ini?</h3>
+            <div class="confirm-btns">
+                <button id="cancelDeleteBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmDeleteBtn" class="confirm-btn-danger">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="logoutConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin logout?</h3>
+            <div class="confirm-btns">
+                <button id="cancelLogoutBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmLogoutBtn" class="confirm-btn-danger">Ya, Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/list-testimoni.js"></script>
+
+</body>
+
+</html>

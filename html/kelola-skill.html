@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Skill</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../style-admin.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="kelola-portfolio.html">Portfolio</a></li>
+            <li><a href="kelola-experience.html">Experience</a></li>
+            <li><a href="kelola-skill.html" class="active">Skill</a></li>
+            <li><a href="list-testimoni.html">Testimoni</a></li>
+            <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="skill-section">
+        <div class="content-header">
+            <h1>Kelola Skill</h1>
+            <button class="add-btn" id="addSkillBtn">
+                <i class="fas fa-plus"></i> Tambah Skill
+            </button>
+        </div>
+        <div class="data-table-container">
+            <table class="data-table" id="skillTable">
+                <thead>
+                    <tr>
+                        <th>Nama Skill</th>
+                        <th>Persentase Keahlian</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="skillModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn skill-close">&times;</span>
+            <h2 id="modalTitle">Tambah Skill</h2>
+            <form id="skillForm">
+                <input type="hidden" id="id_skill">
+                <div class="form-group">
+                    <label for="nama_skill">Nama Skill</label>
+                    <input type="text" id="nama_skill" placeholder="Contoh: Web Design" required>
+                </div>
+                <div class="form-group">
+                    <label for="persentase_keahlian">Persentase Keahlian: <span id="skillValue"
+                            class="skill-value-display">50</span>%</label>
+                    <input type="range" id="persentase_keahlian" min="0" max="100" value="50" class="skill-slider">
+                </div>
+                <button type="submit" class="add-btn">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="logoutConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin logout?</h3>
+            <div class="confirm-btns">
+                <button id="cancelLogoutBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmLogoutBtn" class="confirm-btn-danger">Ya, Logout</button>
+            </div>
+        </div>
+    </div>
+    <div id="deleteConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin menghapus item ini?</h3>
+            <div class="confirm-btns">
+                <button id="cancelDeleteBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmDeleteBtn" class="confirm-btn-danger">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/kelola-skill.js"></script>
+
+</body>
+
+</html>

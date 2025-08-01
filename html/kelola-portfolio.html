@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../style-admin.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="kelola-portfolio.html" class="active">Portfolio</a></li>
+            <li><a href="kelola-experience.html">Experience</a></li>
+            <li><a href="kelola-skill.html">Skill</a></li>
+            <li><a href="list-testimoni.html">Testimoni</a></li>
+            <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="portfolio-section">
+        <div class="content-header">
+            <h1>Kelola Portfolio</h1>
+            <button class="add-btn" id="addPortfolioBtn">
+                <i class="fas fa-plus"></i> Tambah Portfolio
+            </button>
+        </div>
+        <div class="data-table-container">
+            <table class="data-table" id="portfolioTable">
+                <thead>
+                    <tr>
+                        <th>Gambar</th>
+                        <th>Judul</th>
+                        <th>Deskripsi</th>
+                        <th>URL Proyek</th>
+                        <th>URL GitHub</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn portfolio-close">&times;</span>
+            <h2 id="modalTitle">Tambah Portfolio</h2>
+            <form id="portfolioForm">
+                <input type="hidden" id="id_portfolio">
+                <div class="form-group">
+                    <label for="judul_portfolio">Judul</label>
+                    <input type="text" id="judul_portfolio" required>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi_portfolio">Deskripsi</label>
+                    <textarea id="deskripsi_portfolio" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="link_portfolio">URL Proyek</label>
+                    <input type="url" id="link_portfolio" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label for="link_github">URL GitHub</label>
+                    <input type="url" id="link_github" placeholder="https://github.com/user/repo">
+                </div>
+                <div class="form-group">
+                    <label for="gambar_portfolio">Gambar</label>
+                    <input type="file" id="gambar_portfolio" name="gambar_portfolio" accept="image/*">
+                    <small>Kosongkan jika tidak ingin mengubah gambar.</small>
+                </div>
+                <button type="submit" class="add-btn">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="logoutConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin logout?</h3>
+            <div class="confirm-btns">
+                <button id="cancelLogoutBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmLogoutBtn" class="confirm-btn-danger">Ya, Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="deleteConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin menghapus item ini?</h3>
+            <div class="confirm-btns">
+                <button id="cancelDeleteBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmDeleteBtn" class="confirm-btn-danger">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/kelola-portfolio.js"></script>
+
+</body>
+
+</html>

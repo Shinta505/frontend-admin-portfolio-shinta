@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="../style-admin.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo">Admin Panel</div>
+        <ul class="nav-links">
+            <li><a href="kelola-portfolio.html">Portfolio</a></li>
+            <li><a href="kelola-experience.html" class="active">Experience</a></li>
+            <li><a href="kelola-skill.html">Skill</a></li>
+            <li><a href="list-testimoni.html">Testimoni</a></li>
+            <li><a href="#" id="logout-btn">Logout</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <main class="main-content" id="experience-section">
+        <div class="content-header">
+            <h1>Kelola Experience</h1>
+            <button class="add-btn" id="addExperienceBtn">
+                <i class="fas fa-plus"></i> Tambah Experience
+            </button>
+        </div>
+        <div class="data-table-container">
+            <table class="data-table" id="experienceTable">
+                <thead>
+                    <tr>
+                        <th>Bidang Pekerjaan</th>
+                        <th>Nama Perusahaan</th>
+                        <th>Alamat</th>
+                        <th>Masa Kerja</th>
+                        <th>Deskripsi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="experienceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn experience-close">&times;</span>
+            <h2 id="modalTitle">Tambah Experience</h2>
+            <form id="experienceForm">
+                <input type="hidden" id="id_experience">
+                <div class="form-group">
+                    <label for="bidang_pekerjaan">Bidang Pekerjaan</label>
+                    <input type="text" id="bidang_pekerjaan" required>
+                </div>
+                <div class="form-group">
+                    <label for="nama_perusahaan">Nama Perusahaan</label>
+                    <input type="text" id="nama_perusahaan" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group-row">
+                        <label for="provinsi">Provinsi</label>
+                        <select id="provinsi" name="provinsi" required>
+                            <option value="">Pilih Provinsi...</option>
+                        </select>
+                    </div>
+                    <div class="form-group-row">
+                        <label for="kabupaten">Kota/Kabupaten</label>
+                        <select id="kabupaten" name="kabupaten" required>
+                            <option value="">Pilih Kota/Kabupaten...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group-row">
+                        <label for="kecamatan">Kecamatan</label>
+                        <select id="kecamatan" name="kecamatan" required>
+                            <option value="">Pilih Kecamatan...</option>
+                        </select>
+                    </div>
+                    <div class="form-group-row">
+                        <label for="kelurahan">Kelurahan/Desa</label>
+                        <select id="kelurahan" name="kelurahan" required>
+                            <option value="">Pilih Kelurahan/Desa...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="detail_alamat">Detail Alamat</label>
+                    <textarea id="detail_alamat" placeholder="Contoh: Jl. Merdeka No. 12, RT 01/RW 02"
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tahun_masuk">Tahun Masuk</label>
+                    <input type="number" id="tahun_masuk" placeholder="Contoh: 2020" required>
+                </div>
+                <div class="form-group">
+                    <label for="tahun_keluar">Tahun Keluar</label>
+                    <input type="number" id="tahun_keluar" placeholder="Kosongkan jika masih bekerja">
+                    <small>Kosongkan jika masih bekerja di sini.</small>
+                </div>
+                <div class="form-group">
+                    <label for="deskripsi_experience">Deskripsi</label>
+                    <textarea id="deskripsi_experience" required></textarea>
+                </div>
+                <button type="submit" class="add-btn">Simpan</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="logoutConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin logout?</h3>
+            <div class="confirm-btns">
+                <button id="cancelLogoutBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmLogoutBtn" class="confirm-btn-danger">Ya, Logout</button>
+            </div>
+        </div>
+    </div>
+    <div id="deleteConfirmModal" class="modal confirm-modal">
+        <div class="modal-content">
+            <h3>Apakah Anda yakin ingin menghapus item ini?</h3>
+            <div class="confirm-btns">
+                <button id="cancelDeleteBtn" class="confirm-btn-cancel">Batal</button>
+                <button id="confirmDeleteBtn" class="confirm-btn-danger">Ya, Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/kelola-experience.js"></script>
+
+</body>
+
+</html>
