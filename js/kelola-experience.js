@@ -49,8 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Fungsi untuk mengambil data wilayah
-    async function fetchAndPopulate(url, selectElement, placeholder) {
-        // ... (kode ini tidak perlu diubah, biarkan seperti yang sudah ada)
+    async function fetchAndPopulate(url, selectElement, placeholder, selectedValue = null) {
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error('Gagal mengambil data wilayah.');
@@ -59,9 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item.id;
-                option.textContent = item.nama; // Gunakan 'nama' sesuai respons API
+                option.textContent = item.nama;
                 selectElement.appendChild(option);
             });
+            if (selectedValue) {
+                selectElement.value = selectedValue;
+            }
         } catch (error) {
             console.error('Error fetching wilayah:', error);
             selectElement.innerHTML = `<option value="">Gagal memuat</option>`;
@@ -70,16 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fungsi untuk mengambil dan menampilkan data experience
     const getExperiences = async () => {
-        // ... (kode ini tidak perlu diubah)
         try {
             const response = await fetch(BASE_URL);
             if (!response.ok) throw new Error(`Gagal mengambil data. Status: ${response.status}`);
             const experiences = await response.json();
             experienceTableBody.innerHTML = '';
-            experiences.forEach(exp => {
+            for (const exp of experiences) {
                 const masaKerja = (exp.tahun_keluar && exp.tahun_keluar !== 'Sekarang')
                     ? `${exp.tahun_masuk} - ${exp.tahun_keluar}`
                     : `${exp.tahun_masuk} - Sekarang`;
+
                 const row = `
                     <tr>
                         <td>${exp.bidang_pekerjaan}</td>
@@ -94,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                 `;
                 experienceTableBody.innerHTML += row;
-            });
+            }
         } catch (error) {
             console.error('Error fetching experiences:', error);
             experienceTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;">Gagal memuat data: ${error.message}</td></tr>`;
@@ -113,16 +115,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Fungsi untuk setup modal experience
-    const setupExperienceModal = (mode = 'add', data = null) => {
+    const setupExperienceModal = async (mode = 'add', data = null) => {
         experienceForm.reset();
         experienceIdInput.value = '';
         kabupatenSelect.innerHTML = '<option value="">Pilih Kota/Kabupaten...</option>';
         kecamatanSelect.innerHTML = '<option value="">Pilih Kecamatan...</option>';
         kelurahanSelect.innerHTML = '<option value="">Pilih Kelurahan/Desa...</option>';
-        fetchAndPopulate(`${API_WILAYAH_URL}/provinces.json`, provinsiSelect, 'Pilih Provinsi...');
 
         if (mode === 'add') {
             modalTitle.textContent = 'Tambah Experience';
+            await fetchAndPopulate(`${API_WILAYAH_URL}/provinces.json`, provinsiSelect, 'Pilih Provinsi...');
         } else if (mode === 'edit' && data) {
             modalTitle.textContent = 'Edit Experience';
             experienceIdInput.value = data.id_experience;
@@ -131,9 +133,46 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('tahun_masuk').value = data.tahun_masuk;
             document.getElementById('tahun_keluar').value = (data.tahun_keluar === 'Sekarang') ? '' : data.tahun_keluar;
             document.getElementById('deskripsi_experience').value = data.deskripsi_experience;
-            const alamatParts = data.alamat_perusahaan.split(', ');
-            document.getElementById('detail_alamat').value = alamatParts[0] || '';
-            alert("Data berhasil dimuat. Untuk mengubah alamat, silakan pilih kembali dari dropdown Provinsi.");
+
+            // Mem-parsing alamat
+            const alamatParts = data.alamat_perusahaan.split(',').map(part => part.trim());
+            const detailAlamat = alamatParts[0] || '';
+            const kelurahanNama = alamatParts[1] || '';
+            const kecamatanNama = alamatParts[2] || '';
+            const kabupatenNama = alamatParts[3] || '';
+            const provinsiNama = alamatParts[4] || '';
+
+            document.getElementById('detail_alamat').value = detailAlamat;
+
+            // Mengambil dan mengisi data wilayah
+            await fetchAndPopulate(`${API_WILAYAH_URL}/provinces.json`, provinsiSelect, 'Pilih Provinsi...');
+            const provinsiResponse = await fetch(`${API_WILAYAH_URL}/provinces.json`);
+            const provinsiData = await provinsiResponse.json();
+            const provinsi = provinsiData.find(p => p.nama === provinsiNama);
+            if (provinsi) {
+                provinsiSelect.value = provinsi.id;
+                await fetchAndPopulate(`${API_WILAYAH_URL}/regencies/${provinsi.id}.json`, kabupatenSelect, 'Pilih Kota/Kabupaten...');
+                const kabupatenResponse = await fetch(`${API_WILAYAH_URL}/regencies/${provinsi.id}.json`);
+                const kabupatenData = await kabupatenResponse.json();
+                const kabupaten = kabupatenData.find(k => k.nama === kabupatenNama);
+                if (kabupaten) {
+                    kabupatenSelect.value = kabupaten.id;
+                    await fetchAndPopulate(`${API_WILAYAH_URL}/districts/${kabupaten.id}.json`, kecamatanSelect, 'Pilih Kecamatan...');
+                    const kecamatanResponse = await fetch(`${API_WILAYAH_URL}/districts/${kabupaten.id}.json`);
+                    const kecamatanData = await kecamatanResponse.json();
+                    const kecamatan = kecamatanData.find(k => k.nama === kecamatanNama);
+                    if (kecamatan) {
+                        kecamatanSelect.value = kecamatan.id;
+                        await fetchAndPopulate(`${API_WILAYAH_URL}/villages/${kecamatan.id}.json`, kelurahanSelect, 'Pilih Kelurahan/Desa...');
+                        const kelurahanResponse = await fetch(`${API_WILAYAH_URL}/villages/${kecamatan.id}.json`);
+                        const kelurahanData = await kelurahanResponse.json();
+                        const kelurahan = kelurahanData.find(k => k.nama === kelurahanNama);
+                        if(kelurahan) {
+                            kelurahanSelect.value = kelurahan.id
+                        }
+                    }
+                }
+            }
         }
         toggleModal(experienceModal, true);
     };
@@ -144,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${BASE_URL}/${id}`);
             if (!response.ok) throw new Error('Gagal mengambil detail data');
             const experience = await response.json();
-            setupExperienceModal('edit', experience);
+            await setupExperienceModal('edit', experience);
         } catch (error) {
             alert(`Error: ${error.message}`);
         }
@@ -198,10 +237,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Submit Form
     experienceForm.addEventListener('submit', async (e) => {
-        // ... (seluruh logika validasi dan submit form Anda tidak perlu diubah)
         e.preventDefault();
 
-        // Validasi Tahun (Sama seperti sebelumnya)
+        // Validasi Tahun
         const tahunMasuk = parseInt(document.getElementById('tahun_masuk').value, 10);
         const tahunKeluarValue = document.getElementById('tahun_keluar').value;
         const tahunKeluar = tahunKeluarValue ? parseInt(tahunKeluarValue, 10) : null;
