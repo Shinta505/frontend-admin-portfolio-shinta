@@ -42,9 +42,9 @@
                 <thead>
                     <tr>
                         <th>Bidang Pekerjaan</th>
-                        <th>Nama Perusahaan</th>
+                        <th>Perusahaan</th>
+                        <th>Tahun</th>
                         <th>Alamat</th>
-                        <th>Masa Kerja</th>
                         <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
@@ -59,62 +59,42 @@
         <div class="modal-content">
             <span class="close-btn experience-close">&times;</span>
             <h2 id="modalTitle">Tambah Experience</h2>
-            <form id="experienceForm">
+            <form id="experienceForm" novalidate>
                 <input type="hidden" id="id_experience">
                 <div class="form-group">
                     <label for="bidang_pekerjaan">Bidang Pekerjaan</label>
-                    <input type="text" id="bidang_pekerjaan" required>
+                    <input type="text" id="bidang_pekerjaan" placeholder="Contoh: Software Engineer" required>
                 </div>
                 <div class="form-group">
                     <label for="nama_perusahaan">Nama Perusahaan</label>
-                    <input type="text" id="nama_perusahaan" required>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group-row">
-                        <label for="provinsi">Provinsi</label>
-                        <select id="provinsi" name="provinsi" required>
-                            <option value="">Pilih Provinsi...</option>
-                        </select>
-                    </div>
-                    <div class="form-group-row">
-                        <label for="kabupaten">Kota/Kabupaten</label>
-                        <select id="kabupaten" name="kabupaten" required>
-                            <option value="">Pilih Kota/Kabupaten...</option>
-                        </select>
-                    </div>
+                    <input type="text" id="nama_perusahaan" placeholder="Contoh: PT Teknologi Maju" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group-row">
-                        <label for="kecamatan">Kecamatan</label>
-                        <select id="kecamatan" name="kecamatan" required>
-                            <option value="">Pilih Kecamatan...</option>
-                        </select>
+                        <label for="tahun_masuk">Tahun Masuk</label>
+                        <input type="text" id="tahun_masuk" placeholder="Contoh: 2022" required maxlength="4"
+                            pattern="\d{4}">
+                        <small class="error-text" id="error_tahun_masuk"></small>
                     </div>
                     <div class="form-group-row">
-                        <label for="kelurahan">Kelurahan/Desa</label>
-                        <select id="kelurahan" name="kelurahan" required>
-                            <option value="">Pilih Kelurahan/Desa...</option>
-                        </select>
+                        <label for="tahun_keluar">Tahun Keluar</label>
+                        <input type="text" id="tahun_keluar" placeholder="Contoh: 2024 atau Sekarang" required>
+                        <small class="error-text" id="error_tahun_keluar"></small>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="detail_alamat">Detail Alamat</label>
-                    <textarea id="detail_alamat" placeholder="Contoh: Jl. Merdeka No. 12, RT 01/RW 02"
-                        required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="tahun_masuk">Tahun Masuk</label>
-                    <input type="number" id="tahun_masuk" placeholder="Contoh: 2020" required>
+                    <label>Alamat Perusahaan</label>
+                    <div class="form-row" id="alamat-container">
+                    </div>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="alamat_detail">Detail Alamat (Nama Jalan, Gedung, No. Rumah)</label>
+                        <textarea id="alamat_detail" placeholder="Contoh: Jl. Sudirman No. 123, Gedung Cyber, Lt. 5"
+                            rows="2"></textarea>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="tahun_keluar">Tahun Keluar</label>
-                    <input type="number" id="tahun_keluar" placeholder="Kosongkan jika masih bekerja">
-                    <small>Kosongkan jika masih bekerja di sini.</small>
-                </div>
-                <div class="form-group">
-                    <label for="deskripsi_experience">Deskripsi</label>
+                    <label for="deskripsi_experience">Deskripsi Pekerjaan</label>
                     <textarea id="deskripsi_experience" required></textarea>
                 </div>
                 <button type="submit" class="add-btn">Simpan</button>
@@ -131,6 +111,7 @@
             </div>
         </div>
     </div>
+
     <div id="deleteConfirmModal" class="modal confirm-modal">
         <div class="modal-content">
             <h3>Apakah Anda yakin ingin menghapus item ini?</h3>
