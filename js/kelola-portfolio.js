@@ -105,6 +105,7 @@ const openModal = (mode = 'add', data = null) => {
         document.getElementById('deskripsi_portfolio').value = data.deskripsi_portfolio;
         document.getElementById('link_portfolio').value = data.link_portfolio;
         document.getElementById('link_github').value = data.link_github;
+        document.getElementById('gambar_portfolio_url').value = data.gambar_portfolio;
     }
     portfolioModal.style.display = 'block';
 };
@@ -125,15 +126,18 @@ portfolioForm.addEventListener('submit', async (e) => {
     const id = portfolioIdInput.value;
     const isEdit = !!id;
 
-    const formData = new FormData(portfolioForm);
-    // Manually append form fields because FormData constructor with a form doesn't work well with separate inputs
+    const formData = new FormData();
     formData.set('judul_portfolio', document.getElementById('judul_portfolio').value);
     formData.set('deskripsi_portfolio', document.getElementById('deskripsi_portfolio').value);
     formData.set('link_portfolio', document.getElementById('link_portfolio').value);
     formData.set('link_github', document.getElementById('link_github').value);
 
+    const imageUrl = document.getElementById('gambar_portfolio_url').value;
     const imageFile = document.getElementById('gambar_portfolio').files[0];
-    if (imageFile) {
+
+    if (imageUrl) {
+        formData.set('gambar_portfolio', imageUrl);
+    } else if (imageFile) {
         formData.append('gambar_portfolio', imageFile);
     }
 
